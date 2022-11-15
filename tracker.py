@@ -1,4 +1,4 @@
-import db
+#import db
 from tkinter import *
 from tkinter.ttk import *
 
@@ -11,13 +11,55 @@ class ExpenseTracker:
         self.main_window()
 
         #grid, labels, and buttons to be added
+    def add(self, box):
+        myLabel = Label(box, text="The value has been added!")
+        myLabel.grid(row=4, column=0)
 
-# The main function to be added at the end of the script
+    def delete(self, box):
+        myLabel = Label(box, text="The value has been deleted.")
+        myLabel.grid(row=4, column=0)
+
+    def display(self, database):
+        select_all = database
+        return select_all
+
+    def insert(self, database, val1, val2, val3):
+        expense = val1.get()
+        cost = val2.get()
+        date = val3.get()
+        inserted = database(expense, cost, date)
+        return inserted
+    
+    def find_expense(self, database, val1, val2):
+        expense = val1.get()
+        cost = val2.get()
+        locate = database(expense, cost)
+        return locate
+    
+    def delete_expense(self, database, val1, val2):
+        expense = val1.get()
+        cost = val2.get()
+        delete = database(expense, cost)
+        return delete
+
+    # Main Window
+    def main_window(self):
+        button1 = Button(self.frame, text="Groceries expenses", command=self.groceries)
+        button1.pack()
+
+    def groceries(self):
+        top = TopLevel(self.frame)
+
+
+
+
+
+# The main function
 def main():
     #db.create_tables(connection)
     root = Tk()
-    root.gemoetry('250x200')
-    root.title("Expense Tracking Application")
+    root.geometry('250x200')
+    root.title("Expense Tracker")
     tracker = ExpenseTracker(root)
 
     root.mainloop()
