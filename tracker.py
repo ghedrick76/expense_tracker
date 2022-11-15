@@ -42,12 +42,37 @@ class ExpenseTracker:
         delete = database(expense, cost)
         return delete
 
-    # Main Window
+    # Builds main window with each expense type
     def main_window(self):
-        button1 = Button(self.frame, text="Groceries expenses", command=self.groceries)
+        button1 = Button(self.frame, text="Fixed Expenses", command=self.fixed)
         button1.pack()
 
-    def groceries(self):
+        button2 = Button(self.frame, text="Recurring Expenses", command=self.recurring)
+        button2.pack()
+
+        button2 = Button(self.frame, text="Non-recurring Expenses", command=self.nonrecurring)
+        button2.pack()
+
+        button2 = Button(self.frame, text="Extraneous Expenses", command=self.extraneous)
+        button2.pack()
+
+
+
+
+
+
+
+
+    def fixed(self):
+        top = TopLevel(self.frame)
+
+    def recurring(self):
+        top = TopLevel(self.frame)
+
+    def nonrecurring(self):
+        top = TopLevel(self.frame)
+
+    def extraneous(self):
         top = TopLevel(self.frame)
 
 
