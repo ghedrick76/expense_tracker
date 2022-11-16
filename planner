@@ -11,3 +11,6 @@ expense categorizer
 spending analyzer
 
 Categories: Groceries, Gas, Bills, Leisure, Savings
+
+
+what functionalities should be added?  I'm considering adding an auto-insert for recurring expenses.  For example, for mortgage, it would add it automatically on the 1st or 15th of the month.

@@ -1,4 +1,4 @@
-#import db
+import db
 from tkinter import *
 from tkinter.ttk import *
 
@@ -87,18 +87,18 @@ class ExpenseTracker:
         text = Text(top, width=40, height=10)
         text.grid(row=5, column=1, columnspan=2)
 
-        #BUTTONS###
+        # Buttons
 
-        B1 = Button(top, text="Insert Values", command=lambda: (self.insert(db.insert_groceries,e1,e2,e3), self.added(top)))
+        B1 = Button(top, text="Insert Values", command=lambda: (self.insert(db.insert_fixed,e1,e2,e3), self.added(top)))
         B1.grid(row=1, column=2)
 
-        B2 = Button(top, text="Select All", command=lambda: (text.delete(1.0, END), text.insert(END, self.display_all(db.select_all_groceries()))))
+        B2 = Button(top, text="Select All", command=lambda: (text.delete(1.0, END), text.insert(END, self.display_all(db.select_all_fixed()))))
         B2.grid(row=2, column=2)
 
-        B3 = Button(top, text="Find value", command=lambda: (text.delete(1.0, END), text.insert(END, self.find_expense(db.select_grocery, e1,e2))))
+        B3 = Button(top, text="Find value", command=lambda: (text.delete(1.0, END), text.insert(END, self.find_expense(db.select_fixed, e1,e2))))
         B3.grid(row=2, column=3)
 
-        B3 = Button(top, text="Delete expense", command=lambda: (self.delete_expense(db.delete_grocery, e1,e2), self.delete(top)))
+        B3 = Button(top, text="Delete expense", command=lambda: (self.delete_expense(db.delete_fixed, e1,e2), self.delete(top)))
         B3.grid(row=4, column=2)
 
         B5= Button(top, text="Exit", command=exit)
