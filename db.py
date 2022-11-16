@@ -3,31 +3,31 @@ import datetime
 now = datetime.datetime.utcnow()
 
 CREATE_FIXED = "CREATE TABLE IF NOT EXISTS fixed (id INTEGER PRIMARY KEY,expense TEXT, cost INTEGER, date DATE);"
-CREATE_HOUSEHOLD = "CREATE TABLE IF NOT EXISTS household (id INTEGER PRIMARY KEY,expense TEXT, cost INTEGER, date DATE);"
-CREATE_ENTERTAINMENT = "CREATE TABLE IF NOT EXISTS entertainment (id INTEGER PRIMARY KEY,expense TEXT, cost INTEGER, date DATE);"
-CREATE_OTHER = "CREATE TABLE IF NOT EXISTS other (id INTEGER PRIMARY KEY,expense TEXT, cost INTEGER, date DATE);"
+CREATE_RECURRING = "CREATE TABLE IF NOT EXISTS recurring (id INTEGER PRIMARY KEY,expense TEXT, cost INTEGER, date DATE);"
+CREATE_NONRECURRING = "CREATE TABLE IF NOT EXISTS nonrecurring (id INTEGER PRIMARY KEY,expense TEXT, cost INTEGER, date DATE);"
+CREATE_EXTRANEOUS = "CREATE TABLE IF NOT EXISTS extraneous (id INTEGER PRIMARY KEY,expense TEXT, cost INTEGER, date DATE);"
 
 
 INSERT_FIXED = "INSERT INTO fixed (expense, cost, date) VALUES(?,?,?);"
-INSERT_HOUSEHOLD = "INSERT INTO household (expense, cost, date) VALUES(?,?,?);"
-INSERT_ENTERTAINMENT = "INSERT INTO entertainment (expense, cost, date) VALUES(?,?,?);"
-INSERT_OTHER = "INSERT INTO other (expense, cost, date) VALUES(?,?,?);"
+INSERT_RECURRING = "INSERT INTO recurring (expense, cost, date) VALUES(?,?,?);"
+INSERT_NONRECURRING = "INSERT INTO nonrecurring (expense, cost, date) VALUES(?,?,?);"
+INSERT_EXTRANEOUS = "INSERT INTO extraneous (expense, cost, date) VALUES(?,?,?);"
 
 
 SELECT_ALL1 = "SELECT * FROM fixed;"
-SELECT_ALL2 = "SELECT * FROM household;"
-SELECT_ALL3 = "SELECT * FROM entertainment;"
-SELECT_ALL4 = "SELECT * FROM other;"
+SELECT_ALL2 = "SELECT * FROM recurring;"
+SELECT_ALL3 = "SELECT * FROM nonrecurring;"
+SELECT_ALL4 = "SELECT * FROM extraneous;"
 
 SELECT_FIXED = "SELECT * FROM fixed WHERE expense = ? AND cost = ?;"
-SELECT_HOUSEHOLD = "SELECT * FROM household WHERE expense = ? AND cost = ?;"
-SELECT_ENTERTAINMENT = "SELECT * FROM entertainment WHERE expense = ? AND cost = ?;"
-SELECT_OTHER = "SELECT * FROM other WHERE expense = ? AND cost = ?;"
+SELECT_RECURRING = "SELECT * FROM recurring WHERE expense = ? AND cost = ?;"
+SELECT_NONRECURRING = "SELECT * FROM nonrecurring WHERE expense = ? AND cost = ?;"
+SELECT_EXTRANEOUS = "SELECT * FROM extraneous WHERE expense = ? AND cost = ?;"
 
 DELETE_FIXED = "DELETE FROM fixed WHERE expense = ? AND cost = ?;"
-DELETE_HOUSEHOLD = "DELETE FROM household WHERE expense = ? AND cost = ?;"
-DELETE_ENTERTAINMENT = "DELETE FROM entertainment WHERE expense = ? AND cost = ?;"
-DELETE_OTHER = "DELETE FROM other WHERE expense = ? AND cost = ?;"
+DELETE_RECURRING = "DELETE FROM recurring WHERE expense = ? AND cost = ?;"
+DELETE_NONRECURRING = "DELETE FROM nonrecurring WHERE expense = ? AND cost = ?;"
+DELETE_EXTRANEOUS = "DELETE FROM extraneous WHERE expense = ? AND cost = ?;"
 
 
 
@@ -37,7 +37,7 @@ DELETE_OTHER = "DELETE FROM other WHERE expense = ? AND cost = ?;"
 def create_tables():
     conn = sqlite3.connect('data.db')
     with conn:
-        return conn.execute(CREATE_FIXED)
+        return conn.execute(CREATE_EXTRANEOUS)
 
 create_tables()
 
@@ -52,11 +52,11 @@ def insert_fixed(expense, cost, date):
 
 
 
-def insert_household(expense, cost, date):
+def insert_recurring(expense, cost, date):
     conn = sqlite3.connect('data.db')
     with conn:
         c = conn.cursor()
-        c.execute(INSERT_HOUSEHOLD, (expense, cost, date))
+        c.execute(INSERT_RECURRING, (expense, cost, date))
         conn.commit()
         c.close()
 
@@ -64,15 +64,15 @@ def insert_entertrainment(expense, cost, date):
     conn = sqlite3.connect('data.db')
     with conn:
         c = conn.cursor()
-        c.execute(INSERT_ENTERTAINMENT, (expense, cost, date))
+        c.execute(INSERT_NONRECURRING, (expense, cost, date))
         conn.commit()
         c.close()
 
-def insert_other(expense, cost, date):
+def insert_extraneous(expense, cost, date):
     conn = sqlite3.connect('data.db')
     with conn:
         c = conn.cursor()
-        c.execute(INSERT_OTHER, (expense, cost, date))
+        c.execute(INSERT_EXTRANEOUS, (expense, cost, date))
         conn.commit()
         c.close()
 
@@ -97,7 +97,7 @@ def select_all_fixed():
 
 
 
-def select_all_household():
+def select_all_recurring():
     conn = sqlite3.connect('data.db')
     with conn:
         c = conn.cursor()
@@ -123,7 +123,7 @@ def select_all_entertrainment():
             output = output + str(x[1]) + ' ' + str(x[2]) + ' ' + ' ' + str(x[3]) + '\n'
         return output
 
-def select_all_other():
+def select_all_extraneous():
     conn = sqlite3.connect('data.db')
     with conn:
         c = conn.cursor()
@@ -151,11 +151,11 @@ def select_fixed(expense, cost):
             output = output + str(x[1]) + ' ' + str(x[2]) + ' ' + ' ' + str(x[3]) + '\n'
         return output
 
-def select_household(expense, cost):
+def select_recurring(expense, cost):
     conn = sqlite3.connect('data.db')
     with conn:
         c = conn.cursor()
-        c.execute(SELECT_HOUSEHOLD, (expense, cost))
+        c.execute(SELECT_RECURRING, (expense, cost))
         # have to store data into a list of Tuple
         list = c.fetchall()
         c.close()
@@ -164,11 +164,11 @@ def select_household(expense, cost):
             output = output + str(x[1]) + ' ' + str(x[2]) + ' ' + ' ' + str(x[3]) + '\n'
         return output
 
-def select_entertainment(expense, cost):
+def select_nonrecurring(expense, cost):
     conn = sqlite3.connect('data.db')
     with conn:
         c = conn.cursor()
-        c.execute(SELECT_ENTERTAINMENT, (expense, cost))
+        c.execute(SELECT_NONRECURRING, (expense, cost))
         # have to store data into a list of Tuple
         list = c.fetchall()
         c.close()
@@ -177,11 +177,11 @@ def select_entertainment(expense, cost):
             output = output + str(x[1]) + ' ' + str(x[2]) + ' ' + ' ' + str(x[3]) + '\n'
         return output
 
-def select_other(expense, cost):
+def select_extraneous(expense, cost):
     conn = sqlite3.connect('data.db')
     with conn:
         c = conn.cursor()
-        c.execute(SELECT_OTHER, (expense, cost))
+        c.execute(SELECT_EXTRANEOUS, (expense, cost))
         # have to store data into a list of Tuple
         list = c.fetchall()
         c.close()
@@ -200,26 +200,26 @@ def delete_fixed(expense, cost):
         conn.commit()
         c.close()
 
-def delete_household(expense, cost):
+def delete_recurring(expense, cost):
     conn = sqlite3.connect('data.db')
     with conn:
         c = conn.cursor()
-        c.execute(DELETE_HOUSEHOLD, (expense, cost))
+        c.execute(DELETE_RECURRING, (expense, cost))
         conn.commit()
         c.close()
 
-def delete_entertainment(expense, cost):
+def delete_nonrecurring(expense, cost):
     conn = sqlite3.connect('data.db')
     with conn:
         c = conn.cursor()
-        c.execute(DELETE_ENTERTAINMENT, (expense, cost))
+        c.execute(DELETE_NONRECURRING, (expense, cost))
         conn.commit()
         c.close()
 
-def delete_other(expense, cost):
+def delete_extraneous(expense, cost):
     conn = sqlite3.connect('data.db')
     with conn:
         c = conn.cursor()
-        c.execute(DELETE_OTHER, (expense, cost))
+        c.execute(DELETE_EXTRANEOUS, (expense, cost))
         conn.commit()
         c.close()
