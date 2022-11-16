@@ -64,6 +64,9 @@ class ExpenseTracker:
         button6 = Button(self.frame, text="Exit", command=exit)
         button6.pack()
         
+       
+
+
 
 
 
@@ -78,6 +81,7 @@ class ExpenseTracker:
         l1 = Label(top, text="Expense Type").grid(row = 1, column = 0, sticky = W, pady = 2)
         l2 = Label(top, text="Cost").grid(row = 2, column = 0, sticky = W, pady = 2)
         l3 = Label(top, text="Date of Expense").grid(row = 3, column = 0, sticky = W, pady = 2)
+
 
         # Creates the entry widget
         e1 = Entry(top)
