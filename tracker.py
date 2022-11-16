@@ -4,13 +4,14 @@ from tkinter.ttk import *
 
 LARGE_FONT = ("Albertus Medium", 32)
 
+# Creates the ExpenseTracker class
 class ExpenseTracker:
     def __init__(self, master):
         self.frame = Frame(master)
         self.frame.pack()
         self.main_window()
 
-        #grid, labels, and buttons to be added
+    # Create the add and delete functions for the expense types   
     def add(self, box):
         myLabel = Label(box, text="The value has been added!")
         myLabel.grid(row=4, column=0)
@@ -19,6 +20,7 @@ class ExpenseTracker:
         myLabel = Label(box, text="The value has been deleted.")
         myLabel.grid(row=4, column=0)
 
+    # Creates the functions to connect to the database
     def display(self, database):
         select_all = database
         return select_all
@@ -42,7 +44,7 @@ class ExpenseTracker:
         delete = database(expense, cost)
         return delete
 
-    # Builds main window with each button
+    # Builds main window and creates a button for each expense type
     def main_window(self):
         button1 = Button(self.frame, text="Fixed Expenses", command=self.fixed)
         button1.pack()
@@ -69,7 +71,7 @@ class ExpenseTracker:
 
 
 
-
+    # Creates the Fixed Expense window
     def fixed(self):
         top = Toplevel(self.frame)
         top.title('Fixed Expenses')
@@ -77,6 +79,7 @@ class ExpenseTracker:
         l2 = Label(top, text="Cost").grid(row = 2, column = 0, sticky = W, pady = 2)
         l3 = Label(top, text="Date of Expense").grid(row = 3, column = 0, sticky = W, pady = 2)
 
+        # Creates the entry widget
         e1 = Entry(top)
         e1.grid(row=1, column=1, sticky=W, pady=2)
         e2 = Entry(top)
@@ -84,11 +87,11 @@ class ExpenseTracker:
         e3 = Entry(top)
         e3.grid(row=3, column=1, sticky=W, pady=2)
 
+        # Creates the text object
         text = Text(top, width=40, height=10)
         text.grid(row=5, column=1, columnspan=2)
 
-        # Buttons
-
+        # Creates the buttons for each action
         B1 = Button(top, text="Insert Values", command=lambda: (self.insert(db.insert_fixed,e1,e2,e3), self.add(top)))
         B1.grid(row=1, column=2)
 
@@ -107,15 +110,19 @@ class ExpenseTracker:
         B5= Button(top, text="Exit", command=exit)
         B5.grid(row=4, column=3)
 
+    # Creates the Recurring Expense window
     def recurring(self):
         top = Toplevel(self.frame)
 
+    # Creates the Non-Recurring Expense window
     def nonrecurring(self):
         top = Toplevel(self.frame)
 
+    # Creates the Extraneous Expense window
     def extraneous(self):
         top = Toplevel(self.frame)
 
+    # Creates the Analysis window (in progress)
     def analysis(self):
         top = Toplevel(self.frame)
 
