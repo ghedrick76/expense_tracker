@@ -89,10 +89,10 @@ class ExpenseTracker:
 
         # Buttons
 
-        B1 = Button(top, text="Insert Values", command=lambda: (self.insert(db.insert_fixed,e1,e2,e3), self.added(top)))
+        B1 = Button(top, text="Insert Values", command=lambda: (self.insert(db.insert_fixed,e1,e2,e3), self.add(top)))
         B1.grid(row=1, column=2)
 
-        B2 = Button(top, text="Select All", command=lambda: (text.delete(1.0, END), text.insert(END, self.display_all(db.select_all_fixed()))))
+        B2 = Button(top, text="Select All", command=lambda: (text.delete(1.0, END), text.insert(END, self.display(db.select_all_fixed()))))
         B2.grid(row=2, column=2)
 
         B3 = Button(top, text="Find value", command=lambda: (text.delete(1.0, END), text.insert(END, self.find_expense(db.select_fixed, e1,e2))))
@@ -100,6 +100,9 @@ class ExpenseTracker:
 
         B3 = Button(top, text="Delete expense", command=lambda: (self.delete_expense(db.delete_fixed, e1,e2), self.delete(top)))
         B3.grid(row=4, column=2)
+
+        B4 = Button(top, text="Sum", command=lambda: (self.sum_expense(db.sum_fixed, e1,e2), self.sum(top)))
+        B4.grid(row=3, column=2)
 
         B5= Button(top, text="Exit", command=exit)
         B5.grid(row=4, column=3)

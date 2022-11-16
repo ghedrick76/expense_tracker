@@ -8,7 +8,6 @@ CREATE_ENTERTAINMENT = "CREATE TABLE IF NOT EXISTS entertainment (id INTEGER PRI
 CREATE_OTHER = "CREATE TABLE IF NOT EXISTS other (id INTEGER PRIMARY KEY,expense TEXT, cost INTEGER, date DATE);"
 
 
-
 INSERT_FIXED = "INSERT INTO fixed (expense, cost, date) VALUES(?,?,?);"
 INSERT_HOUSEHOLD = "INSERT INTO household (expense, cost, date) VALUES(?,?,?);"
 INSERT_ENTERTAINMENT = "INSERT INTO entertainment (expense, cost, date) VALUES(?,?,?);"
@@ -38,7 +37,9 @@ DELETE_OTHER = "DELETE FROM other WHERE expense = ? AND cost = ?;"
 def create_tables():
     conn = sqlite3.connect('data.db')
     with conn:
-        return conn.execute(CREATE_OTHER)
+        return conn.execute(CREATE_FIXED)
+
+create_tables()
 
 ###INSERT VALUES###
 
