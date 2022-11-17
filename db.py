@@ -7,7 +7,8 @@ CREATE_RECURRING = "CREATE TABLE IF NOT EXISTS recurring (id INTEGER PRIMARY KEY
 CREATE_NONRECURRING = "CREATE TABLE IF NOT EXISTS nonrecurring (id INTEGER PRIMARY KEY,expense TEXT, cost INTEGER, date DATE);"
 CREATE_EXTRANEOUS = "CREATE TABLE IF NOT EXISTS extraneous (id INTEGER PRIMARY KEY,expense TEXT, cost INTEGER, date DATE);"
 
-SUM_FIXED = "SELECT sum(expense) FROM fixed;"
+SUM_FIXED = "SELECT SUM(cost) FROM fixed;"
+#SUM_FIXED = "SUM fixed (cost) VALUES(?);"
 
 INSERT_FIXED = "INSERT INTO fixed (expense, cost, date) VALUES(?,?,?);"
 INSERT_RECURRING = "INSERT INTO recurring (expense, cost, date) VALUES(?,?,?);"
@@ -43,12 +44,30 @@ def create_tables():
 create_tables()
 
 # SUM VALUES
-def sum_fixed(expense):
+
+# def sum_fixed(cost):
+#     conn = sqlite3.connect('data.db')
+#     with conn:
+#         c = conn.cursor()
+#         c.execute(SUM_FIXED, (cost))
+#         conn.commit()
+
+
+
+
+        
+def sum_fixed(cost):
     conn = sqlite3.connect('data.db')
     with conn:
         c = conn.cursor()
-        c.execute(SUM_FIXED, (expense))
-        conn.commit()
+        c.execute(SUM_FIXED, cost)
+        #have to store data into a list of Tuple
+        list = c.fetchall()
+        c.close()
+        output = 'The total sum of expenses is $'
+        for x in list:
+            output = output + str(x[0]) + '\n'
+        return output
 
 ###INSERT VALUES###
 

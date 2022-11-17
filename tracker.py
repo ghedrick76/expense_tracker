@@ -20,10 +20,6 @@ class ExpenseTracker:
         myLabel = Label(box, text="The value has been deleted.")
         myLabel.grid(row=4, column=0)
 
-    #def sum(self, box):
-        #myLabel = Label(box, text=f"The sum is {sum}")
-        #myLabel.grid(row=4, column=0)
-
 
     # Creates the functions to connect to the database
     def display(self, database):
@@ -37,10 +33,10 @@ class ExpenseTracker:
         inserted = database(expense, cost, date)
         return inserted
 
-    def sum_expense(self, database, val1):
-        expense = val1.get()
-        locate = database(expense, cost)
-        return locate
+    # def sum_expense(self, database, val1):
+    #     expense = val1.get()
+    #     locate = database(expense)
+    #     return locate
     
     def find_expense(self, database, val1, val2):
         expense = val1.get()
@@ -49,8 +45,8 @@ class ExpenseTracker:
         return locate
 
     def sum_expense(self, database, val1):
-        expense = val1.get()
-        sum = database(expense)
+        cost = val1.get()
+        sum = database(cost)
         return sum
     
     def delete_expense(self, database, val1, val2):
