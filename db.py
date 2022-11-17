@@ -8,7 +8,8 @@ CREATE_NONRECURRING = "CREATE TABLE IF NOT EXISTS nonrecurring (id INTEGER PRIMA
 CREATE_EXTRANEOUS = "CREATE TABLE IF NOT EXISTS extraneous (id INTEGER PRIMARY KEY,expense TEXT, cost INTEGER, date DATE);"
 
 SUM_FIXED = "SELECT SUM(cost) FROM fixed;"
-#SUM_FIXED = "SUM fixed (cost) VALUES(?);"
+
+#SUM_BY_MONTH = "SELECT SUM(cost) FROM fixed WHERE date"
 
 INSERT_FIXED = "INSERT INTO fixed (expense, cost, date) VALUES(?,?,?);"
 INSERT_RECURRING = "INSERT INTO recurring (expense, cost, date) VALUES(?,?,?);"
@@ -44,17 +45,6 @@ def create_tables():
 create_tables()
 
 # SUM VALUES
-
-# def sum_fixed(cost):
-#     conn = sqlite3.connect('data.db')
-#     with conn:
-#         c = conn.cursor()
-#         c.execute(SUM_FIXED, (cost))
-#         conn.commit()
-
-
-
-
         
 def sum_fixed(cost):
     conn = sqlite3.connect('data.db')

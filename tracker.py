@@ -13,11 +13,11 @@ class ExpenseTracker:
 
     # Create the add and delete functions for the expense types   
     def add(self, box):
-        myLabel = Label(box, text="The value has been added!")
+        myLabel = Label(box, text="The expense has been added!")
         myLabel.grid(row=4, column=0)
 
     def delete(self, box):
-        myLabel = Label(box, text="The value has been deleted.")
+        myLabel = Label(box, text="The expense has been deleted.")
         myLabel.grid(row=4, column=0)
 
 
@@ -32,11 +32,6 @@ class ExpenseTracker:
         date = val3.get()
         inserted = database(expense, cost, date)
         return inserted
-
-    # def sum_expense(self, database, val1):
-    #     expense = val1.get()
-    #     locate = database(expense)
-    #     return locate
     
     def find_expense(self, database, val1, val2):
         expense = val1.get()
@@ -75,14 +70,6 @@ class ExpenseTracker:
         button6 = Button(self.frame, text="Exit", command=exit)
         button6.pack()
         
-       
-
-
-
-
-
-
-
 
     # Creates the Fixed Expense window
     def fixed(self):
@@ -91,9 +78,6 @@ class ExpenseTracker:
         l1 = Label(top, text="Expense Type").grid(row = 1, column = 0, sticky = W, pady = 2)
         l2 = Label(top, text="Cost").grid(row = 2, column = 0, sticky = W, pady = 2)
         l3 = Label(top, text="Date of Expense").grid(row = 3, column = 0, sticky = W, pady = 2)
-
-
-
 
         # Creates the entry widget
         e1 = Entry(top)
@@ -108,19 +92,19 @@ class ExpenseTracker:
         text.grid(row=5, column=1, columnspan=2)
 
         # Creates the buttons for each action
-        B1 = Button(top, text="Insert Values", command=lambda: (self.insert(db.insert_fixed,e1,e2,e3), self.add(top)))
+        B1 = Button(top, text="Add expense", command=lambda: (self.insert(db.insert_fixed,e1,e2,e3), self.add(top)))
         B1.grid(row=1, column=2)
 
-        B2 = Button(top, text="Select All", command=lambda: (text.delete(1.0, END), text.insert(END, self.display(db.select_all_fixed()))))
+        B2 = Button(top, text="Select all expenses", command=lambda: (text.delete(1.0, END), text.insert(END, self.display(db.select_all_fixed()))))
         B2.grid(row=2, column=2)
 
-        B3 = Button(top, text="Find value", command=lambda: (text.delete(1.0, END), text.insert(END, self.find_expense(db.select_fixed, e1,e2))))
+        B3 = Button(top, text="Find expense", command=lambda: (text.delete(1.0, END), text.insert(END, self.find_expense(db.select_fixed, e1,e2))))
         B3.grid(row=2, column=3)
 
         B3 = Button(top, text="Delete expense", command=lambda: (self.delete_expense(db.delete_fixed, e1,e2), self.delete(top)))
         B3.grid(row=4, column=2)
 
-        B4 = Button(top, text="Sum", command=lambda: (text.delete(1.0, END), text.insert(END, self.sum_expense(db.sum_fixed, e1))))
+        B4 = Button(top, text="Sum all expenses", command=lambda: (text.delete(1.0, END), text.insert(END, self.sum_expense(db.sum_fixed, e1))))
         B4.grid(row=3, column=2)
 
         B5= Button(top, text="Exit", command=exit)
