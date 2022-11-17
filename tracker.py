@@ -20,6 +20,11 @@ class ExpenseTracker:
         myLabel = Label(box, text="The value has been deleted.")
         myLabel.grid(row=4, column=0)
 
+    #def sum(self, box):
+        #myLabel = Label(box, text=f"The sum is {sum}")
+        #myLabel.grid(row=4, column=0)
+
+
     # Creates the functions to connect to the database
     def display(self, database):
         select_all = database
@@ -31,12 +36,22 @@ class ExpenseTracker:
         date = val3.get()
         inserted = database(expense, cost, date)
         return inserted
+
+    def sum_expense(self, database, val1):
+        expense = val1.get()
+        locate = database(expense, cost)
+        return locate
     
     def find_expense(self, database, val1, val2):
         expense = val1.get()
         cost = val2.get()
         locate = database(expense, cost)
         return locate
+
+    def sum_expense(self, database, val1):
+        expense = val1.get()
+        sum = database(expense)
+        return sum
     
     def delete_expense(self, database, val1, val2):
         expense = val1.get()
@@ -73,7 +88,6 @@ class ExpenseTracker:
 
 
 
-
     # Creates the Fixed Expense window
     def fixed(self):
         top = Toplevel(self.frame)
@@ -81,6 +95,8 @@ class ExpenseTracker:
         l1 = Label(top, text="Expense Type").grid(row = 1, column = 0, sticky = W, pady = 2)
         l2 = Label(top, text="Cost").grid(row = 2, column = 0, sticky = W, pady = 2)
         l3 = Label(top, text="Date of Expense").grid(row = 3, column = 0, sticky = W, pady = 2)
+
+
 
 
         # Creates the entry widget
@@ -108,7 +124,7 @@ class ExpenseTracker:
         B3 = Button(top, text="Delete expense", command=lambda: (self.delete_expense(db.delete_fixed, e1,e2), self.delete(top)))
         B3.grid(row=4, column=2)
 
-        B4 = Button(top, text="Sum", command=lambda: (self.sum_expense(db.sum_fixed, e1,e2), self.sum(top)))
+        B4 = Button(top, text="Sum", command=lambda: (text.delete(1.0, END), text.insert(END, self.sum_expense(db.sum_fixed, e1))))
         B4.grid(row=3, column=2)
 
         B5= Button(top, text="Exit", command=exit)
